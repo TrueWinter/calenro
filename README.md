@@ -9,4 +9,5 @@ Calenro is released under the MIT license.
 # Third-Party Icons
 
 Relax icons created by monkik - Flaticon
+
 Broken icons created by Freepik - Flaticon
