@@ -1,0 +1,80 @@
+<!--
+  ~ Copyright 2018 The app Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/settings_notifications_header">
+
+        <Preference
+            app:key="daily_notification_time"
+            app:title="@string/daily_notification_time_title"
+            app:summary="@string/daily_notification_time_summary" />
+
+        <SwitchPreferenceCompat
+            app:key="event_start_notification"
+            app:title="@string/event_start_notification_title"
+            app:summary="@string/event_start_notification_summary" />
+
+        <SwitchPreferenceCompat
+            app:key="permanent_notification"
+            app:title="@string/permanent_notification_title"
+            app:summary="@string/permanent_notification_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Important Info">
+        // The summary in the category title is cut off with no easy way to enable text wrapping
+        <Preference
+            app:key="pref_static_field_key_0"
+            app:persistent="false"
+            app:summary="Please read all the information below before using Calenro."
+            android:selectable="false" />
+
+        <Preference
+            app:key="pref_static_field_key_1"
+            app:persistent="false"
+            app:title="Beta App"
+            app:summary="Calenro is currently in beta. Certain features may not work as expected. Please report any bugs by contacting TrueWinter support or filing an issue on GitHub." />
+
+        <Preference
+            app:key="pref_static_field_key_2"
+            app:persistent="false"
+            app:title="Battery Optimization"
+            app:summary="Certain devices do not allow apps to run in the background. If you are not receiving notifications, please enable background app permissions. For more information, please visit https://dontkillmyapp.com/ and select your device.">
+            <intent android:action="android.intent.action.VIEW" android:data="https://dontkillmyapp.com/" android:label="Open URL" />
+        </Preference>
+
+        <Preference
+            app:key="pref_static_field_key_3"
+            app:persistent="false"
+            app:title="Timing"
+            app:summary="Calenro's background tasks run every 15 minutes. Due to this, notifications may be early or delayed by up to 15 minutes." />
+
+        <Preference
+            app:key="pref_static_field_key_4"
+            app:persistent="false"
+            app:title="Phone Restarts"
+            app:summary="Calenro may not always start after your phone restarts. Please open Calenro after restarting your phone to ensure that it will run in the background." />
+
+        <Preference
+            app:key="pref_static_field_key_5"
+            app:persistent="false"
+            app:title="Limitation of Liability"
+            app:summary="While Calenro is intended to help you remember your tasks for the day, it isn't perfect. Therefore, you shouldn't entirely rely on Calenro and should still check your calendar if you believe Calenro missed a notification. The developer and contributors are not responsible for any issues caused by the use of Calenro." />
+    </PreferenceCategory>
+
+</PreferenceScreen>
