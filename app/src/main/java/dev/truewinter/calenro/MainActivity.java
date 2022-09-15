@@ -93,14 +93,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             ScheduledTaskManager.startAlarmManagerIfNotStarted(getApplicationContext());
             ScheduledTaskManager.showPermanentNotification(events, getApplicationContext());
         }
-
-        try {
-            JSONObject j = new JSONObject();
-            j.put("test", "testing");
-            RemoteLogger.log(j, getApplicationContext());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
