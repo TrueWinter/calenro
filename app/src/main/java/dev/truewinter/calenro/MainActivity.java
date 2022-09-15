@@ -14,6 +14,7 @@ import android.provider.CalendarContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         toolbar.setTitle(R.string.to_do);
         setSupportActionBar(toolbar);
 
+        if (BuildConfig.DEBUG) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+
         NotificationManager.registerAllNotificationChannels(getApplicationContext());
 
         TextView errorHome = findViewById(R.id.error_home);
@@ -87,6 +92,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         } else {
             ScheduledTaskManager.startAlarmManagerIfNotStarted(getApplicationContext());
             ScheduledTaskManager.showPermanentNotification(events, getApplicationContext());
+        }
+
+        try {
+            JSONObject j = new JSONObject();
+            j.put("test", "testing");
+            RemoteLogger.log(j, getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

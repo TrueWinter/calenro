@@ -1,20 +1,28 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs { release }
+
     compileSdkVersion 31
+
     defaultConfig {
         applicationId "dev.truewinter.calenro"
         minSdkVersion 26
         //noinspection OldTargetApi
         targetSdkVersion 31
-        versionCode 1
-        versionName "0.0.1"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 2
+        versionName "0.0.2"
+        signingConfig signingConfigs.release
     }
+
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -37,4 +45,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
+
+File propFile = file('signing.properties');
+if (propFile.exists()) {
+    def Properties props = new Properties()
+    props.load(new FileInputStream(propFile))
+
+    if (props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    android.buildTypes.release.signingConfig = null
 }

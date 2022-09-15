@@ -24,6 +24,7 @@ import java.util.Arrays;
 */
 public class RemoteLogger {
     public static void log(final JSONObject data, Context context) {
+        if (!BuildConfig.DEBUG) return;
         String loggerUrl = null;
 
         try {

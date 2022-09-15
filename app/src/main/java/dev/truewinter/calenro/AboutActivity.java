@@ -21,7 +21,9 @@ public class AboutActivity extends AppCompatActivity {
 
         TextView aboutVersion = findViewById(R.id.about_version);
         aboutVersion.setText(getResources().getString(R.string.app_version)
-                .replace("{{version}}", BuildConfig.VERSION_NAME));
+                .replace("{{version}}",
+                        BuildConfig.DEBUG ? BuildConfig.VERSION_NAME + " (debug)"
+                                : BuildConfig.VERSION_NAME));
 
         TextView githubLink = findViewById(R.id.about_github_link);
         githubLink.setOnClickListener(new View.OnClickListener() {
