@@ -47,6 +47,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
 
+// https://gist.github.com/SleeplessByte/89c90f702c0f2fdc2b12
 File propFile = file('signing.properties');
 if (propFile.exists()) {
     def Properties props = new Properties()
