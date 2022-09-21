@@ -125,6 +125,7 @@ public class SettingsActivity extends AppCompatActivity {
             permanentNotification.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
+                    MainActivity.updateCalendarData(activity);
                     ScheduledTaskManager.showPermanentNotification(MainActivity.getEvents(), activity);
                     return false;
                 }
