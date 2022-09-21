@@ -19,8 +19,9 @@
         android:directBootAware="true">
         <receiver android:name=".BootReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
             android:exported="true">
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
         <receiver android:name=".AlarmReceiver" android:exported="true" />
