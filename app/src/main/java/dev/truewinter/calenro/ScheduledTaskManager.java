@@ -1,10 +1,12 @@
 package dev.truewinter.calenro;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.service.notification.StatusBarNotification;
 
 import androidx.core.app.NotificationCompat;
@@ -22,7 +24,11 @@ public class ScheduledTaskManager {
     private static void startAlarmManager(Context context) {
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_MUTABLE;
+        }
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, flags);
 
         Calendar calendar = Calendar.getInstance();
         // 15 minutes is the minimum allowed while the phone is idle
@@ -69,6 +75,8 @@ public class ScheduledTaskManager {
             notificationText.append(context.getString(R.string.notification_relax_48h));
         }
 
+        // TODO: Fix the setContentIntent error
+        @SuppressLint("NotificationTrampoline")
         NotificationCompat.Builder notification = new NotificationCompat.Builder(context,
                 NotificationManager.NotificationChannel.PERMANENT.getId())
                 .setSmallIcon(R.drawable.ic_notification_icon)
@@ -114,16 +122,22 @@ public class ScheduledTaskManager {
 
     // https://stackoverflow.com/a/9575569
     public static boolean hasRunningAlarmManager(Context context) {
+        int flags = PendingIntent.FLAG_NO_CREATE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_MUTABLE;
+        }
         return (PendingIntent.getBroadcast(context, REQUEST_CODE,
-                new Intent(context, AlarmReceiver.class),
-                PendingIntent.FLAG_NO_CREATE) != null);
+                new Intent(context, AlarmReceiver.class), flags) != null);
 
     }
 
     public static PendingIntent getRunningAlarmManager(Context context) {
+        int flags = PendingIntent.FLAG_NO_CREATE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_MUTABLE;
+        }
         return PendingIntent.getBroadcast(context, REQUEST_CODE,
-                new Intent(context, AlarmReceiver.class),
-                PendingIntent.FLAG_NO_CREATE);
+                new Intent(context, AlarmReceiver.class), flags);
 
     }
 
