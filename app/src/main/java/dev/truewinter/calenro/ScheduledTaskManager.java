@@ -55,8 +55,12 @@ public class ScheduledTaskManager {
 
         Intent openIntent = new Intent(context, NotificationReceiver.class);
         openIntent.putExtra("notificationType", NotificationManager.NotificationType.PERMANENT_NOTIFICATION);
+        int flags = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags = PendingIntent.FLAG_MUTABLE;
+        }
         PendingIntent openPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(),
-                NotificationManager.PERMANENT_NOTIFICATION_ID, openIntent, 0);
+                NotificationManager.PERMANENT_NOTIFICATION_ID, openIntent, flags);
 
         StringBuilder notificationText = new StringBuilder();
 

@@ -98,24 +98,20 @@ public class NotificationManager {
 
     // https://developer.android.com/develop/ui/views/notifications/build-notification
     private static void createNotificationChannel(NotificationChannel notificationChannel, Context context) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int importance = notificationChannel.isLowPriority() ? android.app.NotificationManager.IMPORTANCE_MIN : android.app.NotificationManager.IMPORTANCE_DEFAULT;
-            android.app.NotificationChannel channel = new android.app.NotificationChannel(notificationChannel.getId(), notificationChannel.getName(), importance);
-            if (notificationChannel.getDescription() != null) {
-                channel.setDescription(notificationChannel.getDescription());
-            }
-
-            if (notificationChannel.isLowPriority()) {
-                channel.setShowBadge(false);
-            }
-
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            android.app.NotificationManager notificationManager = context.getSystemService(android.app.NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+        int importance = notificationChannel.isLowPriority() ? android.app.NotificationManager.IMPORTANCE_MIN : android.app.NotificationManager.IMPORTANCE_DEFAULT;
+        android.app.NotificationChannel channel = new android.app.NotificationChannel(notificationChannel.getId(), notificationChannel.getName(), importance);
+        if (notificationChannel.getDescription() != null) {
+            channel.setDescription(notificationChannel.getDescription());
         }
+
+        if (notificationChannel.isLowPriority()) {
+            channel.setShowBadge(false);
+        }
+
+        // Register the channel with the system; you can't change the importance
+        // or other notification behaviors after this
+        android.app.NotificationManager notificationManager = context.getSystemService(android.app.NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
 
     public static void registerAllNotificationChannels(Context context) {

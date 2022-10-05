@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -92,8 +93,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent openIntent = new Intent(context, NotificationReceiver.class);
         openIntent.putExtra("notificationType", NotificationManager.NotificationType.DAILY_NOTIFICATION);
+        int flags = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags = PendingIntent.FLAG_MUTABLE;
+        }
         PendingIntent openPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(),
-                getRandom(), openIntent, 0);
+                getRandom(), openIntent, flags);
 
         StringBuilder notificationText = new StringBuilder();
 
