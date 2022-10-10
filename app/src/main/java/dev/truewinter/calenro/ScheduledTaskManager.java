@@ -132,7 +132,6 @@ public class ScheduledTaskManager {
         }
         return (PendingIntent.getBroadcast(context, REQUEST_CODE,
                 new Intent(context, AlarmReceiver.class), flags) != null);
-
     }
 
     public static PendingIntent getRunningAlarmManager(Context context) {

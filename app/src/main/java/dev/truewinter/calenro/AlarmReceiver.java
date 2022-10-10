@@ -159,8 +159,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Intent openIntent = new Intent(context, NotificationReceiver.class);
                 openIntent.putExtra("notificationType", NotificationManager.NotificationType.EVENT_NOTIFICATION);
                 openIntent.putExtra("eventId", e.getId());
+                int flags = 0;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    flags = PendingIntent.FLAG_MUTABLE;
+                }
                 PendingIntent openPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(),
-                        getRandom(), openIntent, 0);
+                        getRandom(), openIntent, flags);
 
                 TimeFormat.ReadableTimeFormat readableTimeFormat = TimeFormat.getInstance()
                         .createReadableTime(e.getStart(), e.getEnd());
