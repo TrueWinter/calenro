@@ -130,6 +130,7 @@ public class ScheduledTaskManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             flags |= PendingIntent.FLAG_MUTABLE;
         }
+
         return (PendingIntent.getBroadcast(context, REQUEST_CODE,
                 new Intent(context, AlarmReceiver.class), flags) != null);
     }

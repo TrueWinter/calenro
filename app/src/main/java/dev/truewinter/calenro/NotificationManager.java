@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager;
 public class NotificationManager {
     private static NotificationManager instance = null;
 
+    // See comment in getNotificationId()
     public static final int PERMANENT_NOTIFICATION_ID = 1073741825;
 
     public enum NotificationChannel {

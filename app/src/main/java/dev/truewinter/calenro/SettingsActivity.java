@@ -75,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
             dailyNotificationTime.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
+                    Permissions.requestNotificationPermissions(activity);
                     showTimePicker();
                     return false;
                 }

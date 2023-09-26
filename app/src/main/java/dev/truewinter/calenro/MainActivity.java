@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
 
+        Permissions.requestNotificationPermissions(this);
         NotificationManager.registerAllNotificationChannels(getApplicationContext());
 
         TextView errorHome = findViewById(R.id.error_home);

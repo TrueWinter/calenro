@@ -10,8 +10,8 @@ android {
         minSdkVersion 26
         //noinspection OldTargetApi
         targetSdkVersion 33
-        versionCode 7
-        versionName "0.0.7"
+        versionCode 8
+        versionName "0.0.8"
         signingConfig signingConfigs.release
     }
 
