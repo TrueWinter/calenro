@@ -3,13 +3,12 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs { release }
 
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "dev.truewinter.calenro"
         minSdkVersion 26
-        //noinspection OldTargetApi
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 8
         versionName "0.0.8"
         signingConfig signingConfigs.release
